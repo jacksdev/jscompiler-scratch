@@ -1,13 +1,19 @@
+
+
 const LETTERS = /[a-z]/i;
+const WHITESPACE = /\s/;
+const NUMBERS = /\d/;
+
+
 module.exports = function tokenizer(input) {
   const tokens = [];
   let current = 0;
   while (current < input.length) {
     let char = input[current];
-    if (char === '(') {
+    if (char === '(' || char === ')') {
       tokens.push({
         type: 'paren',
-        value: '('
+        value: '{'
       });
       current++;
       continue;
@@ -24,6 +30,23 @@ module.exports = function tokenizer(input) {
       });
       continue;
     }
+    if (WHITESPACE.test(char)) {
+      current++;
+      continue;
+    }
+    if (NUMBERS.test(char)) {
+      let value = '';
+      while (NUMBERS.test(char)) {
+        value += char;
+        char = input[++current];
+      }
+      tokens.push({
+        type: 'number',
+        value
+      });
+      continue;
+    }
+    console.log(tokens)
     throw new TypeError(`Unknown char: '${char}'`);
   }
   return tokens;
