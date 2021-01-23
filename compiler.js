@@ -1,6 +1,6 @@
 
-const tokenizer = require('./tokenizer.js');
-
+const tokenizer = require('./tokenizer');
+const parser = require('./parser');
 
 
 module.exports = function compiler(input){
@@ -17,6 +17,6 @@ module.exports = function compiler(input){
   // 3. Transformation
   // 4. Code Generation
   //
-  // return jsCode;
+  return tokens;
   
 }       
