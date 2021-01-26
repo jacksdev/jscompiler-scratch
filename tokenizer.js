@@ -1,10 +1,7 @@
 
-
 const LETTERS = /[a-z]/i;
 const WHITESPACE = /\s/;
 const NUMBERS = /\d/;
-
-
 module.exports = function tokenizer(input) {
   const tokens = [];
   let current = 0;
@@ -13,7 +10,7 @@ module.exports = function tokenizer(input) {
     if (char === '(' || char === ')') {
       tokens.push({
         type: 'paren',
-        value: '{'
+        value: char
       });
       current++;
       continue;
@@ -46,7 +43,6 @@ module.exports = function tokenizer(input) {
       });
       continue;
     }
-    console.log(tokens)
     throw new TypeError(`Unknown char: '${char}'`);
   }
   return tokens;

@@ -1,18 +1,13 @@
 module.exports = function parser(tokens) {
-
   let current = 0;
-
   function walk() {
-
     let token = tokens[current];
-    
     if (token.type === 'number') {
-        current++;
-        return {
-          type: 'NumberLiteral',
-          value: token.value
-        };
-      }
+      current++;
+      return {
+        type: 'NumberLiteral',
+        value: token.value
+      };
     }
     if (token.type === 'paren' && token.value === '(') {
       token = tokens[++current];
@@ -29,14 +24,12 @@ module.exports = function parser(tokens) {
       current++;
       return expression;
     }
-    throw new TypeError(`Unknown token: '${token.type}'`);
+    throw new TypeError(`Unknown token: '${token}'`);
   }
-
   const ast = {
     type: 'Program',
     body: [walk()]
   };
-    
-  
-    return ast;
-  }
+
+  return ast;
+}
