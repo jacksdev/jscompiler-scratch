@@ -5,7 +5,10 @@ module.exports = function transformer(originalAST) {
     body: []
   };
 
-  traverse(originalAST, {});
+  traverse(originalAST, {
+    NumberLiteral(node) {
+    }
+  });
 
   return jsAST;
 }
